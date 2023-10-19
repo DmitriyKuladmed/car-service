@@ -1,0 +1,32 @@
+{% extends "basis/base.html" %}
+
+{% block body %}
+    <div class="col-10 offset-0">
+        <h2>Basket Details</h2>
+        {% if basket %}
+        <ul>
+            {% for basket_service in basket.basketservice_set.all %}
+                <div class="service-item">
+                    <li>
+                        <form action="{% url 'delete_service' basket_service.service.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger" style="float: right;">Remove service from cart</button>
+                        </form>
+                        <strong>Service Name:</strong> {{ basket_service.service.name }}<br>
+                        <strong>Price:</strong> {{ basket_service.service.price }}$<br>
+                        <strong>Quantity:</strong> {{ basket_service.quantity }}<br>
+                    </li>
+                </div>
+            {% endfor %}
+                <hr>
+            </ul>
+            <h3>Total Cost: {{ basket.sum_price }}$</h3>
+        {% else %}
+            <p>Your cart is empty.</p>
+        {% endif %}
+        <form action="{% url 'create_order' basket.sum_price%}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Create Order</button>
+        </form>
+    </div>
+{% endblock %}

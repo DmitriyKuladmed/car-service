@@ -1,0 +1,48 @@
+{% extends "basis/base.html" %}
+
+{% block body %}
+    <h1><strong>New Service</strong></h1>
+    {% if form.errors %}
+        <p>{{ form.errors.error }}</p>
+    {% endif %}
+    <form action="{% url 'create_service' %}" method="post">
+        {% csrf_token %}
+        <div class="row ">
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <label class="username">Service name :</label>
+                    </div>
+                    <div class="col-xs-8">
+                        <div class="uname">
+                            {{form.name}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-----For email---->
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <label class="mail">Price :</label></div>
+                    <div class="col-xs-8">
+                        <div class="email">{{form.price}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-----------For Phone number-------->
+        <div class="col-sm-12">
+            <div class="row">
+                <br><br>
+                <div class="col-sm-12">
+                    <button type="submit" class="floating-button">Create</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+{% endblock %}

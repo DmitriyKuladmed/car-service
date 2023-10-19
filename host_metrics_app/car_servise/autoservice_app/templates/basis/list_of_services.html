@@ -1,0 +1,33 @@
+{% extends "basis/base.html" %}
+
+{% block body %}
+    <div class="col-10 offset-0">
+        <h1>
+            Information about the services provided
+        </h1>
+        <div class="col-10 offset-0">
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        {% for item in data %}
+        <div class="alert alert-danger">
+            <div class="alert alert-danger">
+                <ul>
+                    <b>Название услуги:&nbsp</b>{{ item.name }}<br>
+
+                    {% if user.is_superuser %}
+
+                    {% else %}
+                        <br><a href="{% url 'detail' item.id %}" class="glow-button">Детальнее</a>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

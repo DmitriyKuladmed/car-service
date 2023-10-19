@@ -1,0 +1,21 @@
+{% extends "basis/base.html" %}
+
+{% block body %}
+    <div class="container">
+        <h1>
+            Your Account
+        </h1>
+        <strong>Username:</strong> {{ user }} <br>
+        <strong>Email:</strong> {{ user.email }} <br>
+        <strong>Your account was created on:</strong> {{ user.date_joined }}
+        {% if user.is_superuser %}
+            <p>
+                This user is a superuser and has additional privileges.
+            </p>
+        {% else %}
+            <p>
+                This user does not have superuser privileges.
+            </p>
+        {% endif %}
+    </div>
+{% endblock %}

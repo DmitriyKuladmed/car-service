@@ -1,0 +1,26 @@
+{% extends "basis/base.html" %}
+
+{% block body %}
+    <div class="col-10 offset-0">
+        <h1>
+            Information about the service
+        </h1>
+        <div class="alert alert-danger">
+            <div class="alert alert-danger">
+                <ul>
+                    <b>Название услуги:&nbsp</b>{{ record.name }}<br>
+                    <b>Цена:&nbsp</b>{{ record.price }}<br>
+
+                    {% if user.is_superuser %}
+                        <p>Superuser can't order services :)</p>
+                    {% else %}
+                        {% csrf_token %}
+                        {% if user.is_authenticated %}
+                            <br><a href="{% url 'add_to_basket' record.name user.username%}" class="glow-button">Add to basket</a>
+                        {% endif %}
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
